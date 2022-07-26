@@ -1,0 +1,104 @@
+var listServer = [
+	//'n00dles',
+	//'foodnstuff',
+	//'sigma-cosmetics',
+	'joesguns',
+	'nectar-net',
+	'hong-fang-tea',
+	'harakiri-sushi',
+	//'neo-net',
+	'zer0',
+	'max-hardware',
+	'iron-gym',
+	'phantasy',
+	'silver-helix',
+	'omega-net',
+	'crush-fitness',
+	'johnson-ortho',
+	'the-hub',
+	'computek',
+	'netlink',
+	'rothman-uni',
+	'catalyst',
+	'summit-uni',
+	'rho-construction',
+	'millenium-fitness',
+	'aevum-police',
+	'alpha-ent',
+	'syscore',
+	'lexo-corp',
+	'snap-fitness',
+	'global-pharm',
+	'applied-energetics',
+	'unitalife',
+	'univ-energy',
+	'nova-med',
+	'zb-def',
+	'zb-institute',
+	'vitalife',
+	'titan-labs',
+	'solaris',
+	'microdyne',
+	'helios',
+	'deltaone',
+	'icarus',
+	'zeus-med',
+	'omnia',
+	'defcomm',
+	'galactic-cyber',
+	'infocomm',
+	'taiyang-digital',
+	'stormtech',
+	'aerocorp',
+	'clarkinc',
+	'omnitek',
+	'nwo',
+	'4sigma',
+	'blade',
+	'b-and-a',
+	'ecorp',
+	'fulcrumtech',
+	'megacorp',
+	'kuai-gong',
+	'fulcrumassets',
+	'powerhouse-fitness'
+];
+var accessibleServer = []
+
+for (i=0; i<listServer.length; i++) hasRootAccess(listServer[i]) ? accessibleServer.push(listServer[i]) : undefined 
+
+
+disableLog("exec")
+
+var script = 'scriptHome.script';
+var home = getHostname();
+tprint('Home accesible RAM : ' + getServerMaxRam(home))
+var thread = Math.round(((getServerMaxRam(home) - 3.2) / 25) / 2.4);
+tprint('Thread allowed per script : ' + thread)
+if (thread != 0){
+
+	// for(j = accessibleServer.length-1; j > accessibleServer.length - 10 ; j--){
+	// 	tprint(accessibleServer[j] +' - '+ j)
+	// 	if ( isRunning(script, home, accessibleServer[j] ) || !hasRootAccess(accessibleServer[j])) {
+	// 		tprint ('Skipped ' + accessibleServer[j] + " because the script is already running or hasn't root access");
+	// 		continue;
+	// 		};
+	// 	exec(script, home, thread, accessibleServer[j]);
+	// 	print(j +' - '+ accessibleServer[j])
+	// }
+
+
+	for (i = 0; i <= 25; i++ ){
+	tprint(accessibleServer[i] +' - '+ i)
+	if ( isRunning(script, home, accessibleServer[i] ) || !hasRootAccess(accessibleServer[i])) {
+		tprint ('Skipped ' + accessibleServer[i] + " because the script is already running or hasn't root access");
+		continue;
+		};
+	exec(script, home, thread, accessibleServer[i]);
+	print(i +' - '+ accessibleServer[i])
+	};
+} else {
+	tprint ("Not enough RAM on your system (64GB recommended)")
+}
+var ramleft = getServerMaxRam(home) - getServerUsedRam(home)
+tprint('homeStart.script finished working. ' + Math.ceil(ramleft*100)/100 + 'GB left.')

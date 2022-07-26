@@ -1,0 +1,30 @@
+Liste des servers hacké :
+_________________________________________________________________________________________
+|	-ServerName			|	ScriptName	threads				|	- AvailableRam			|
+|-----------------------|-----------------------------------|---------------------------|
+|	- n00dles 			|	(run: n00dles.script 1)  		|	- 4  Go 				|
+|	- foodnstuff 		|	(run: foodnstuff.script 6)  	|	- 16 Go					|
+|	- sigma-cosmetics 	|	(run: sigma-cosmetics.script 6) |	- 16 Go					|
+|	- joesguns 			|	(run: joesguns.script 6)  		|	- 16 Go					|
+|	- hong-fang-tea 	|	(run: hong-fang-tea.script 6)  	|	- 16 Go					|
+|	- harakiri-sushi 	|	(run: harakiri-sushi.script 6)  |	- 16 Go					|
+|	- iron-gym 			|	(run: iron-gym.script 12)  		|	- 32 Go					|
+|	- max-hardware 		|	(run : max-hardware.script 12)  |	- 32 Go					|
+|	- nectar-net 		|	(run: nectar-net.script 6)  	|	- 16 Go					|
+|	- zer0 				|	(run: zer0.script 12)  			|	- 32 Go					|
+|	- CSEC 				|	(run: CSEC.script 2)  			|	- 8  Go 				|
+|	- silver-helix 		|	(run: silver-helix.script 24)  	|	- 64 Go					|
+|	- omega-net 		|	(run: omega-net.script 12)  	|	- 32 Go					|
+|	- phantasy 			|	(run: phantasy.script 12)  		|	- 32 Go					|
+|	- neo-net 			|	(run: neo-net.script 12)  		|	- 32 Go					|
+|	- avmnite-02h		|	(run: avmnite-02h.script 24)	|	- 64 Go					|
+|	- johnson-ortho		|	(run: 0x00)						|	- 0  Go					|
+|	- crush-fitness		|	(run: 0x00)						|	- 0  Go					|
+|	- the-hub			|	(run: the-hub.script 24)	   	|	- 64 Go					|
+|	- catalyst 			|	(run: catalyst.script 24)		|	- 64 Go					|
+|	- zb-institute 		|	(run: zb-institute.script 48)	|	- 128Go					|
+|	- syscore 			|	(run: 0x00)						| 	- 0  Go					|
+|	- rothman-uni 		|	(run: rothman-uni.script 6)		| 	- 16 Go					|
+|	- summit-uni 		|	(run: summit-uni.script 24)		| 	- 64 Go					|
+|	- I.I.I.I			|	(run: I.I.I.I.script 6)			| 	- 16 Go					|
+|_______________________|___________________________________|___________________________|

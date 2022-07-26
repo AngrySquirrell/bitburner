@@ -1,0 +1,77 @@
+var s = args[0];
+var i = 0;
+
+var stats = {
+   "growIteration":0,
+   "hackIteration":0,
+   "weakenIteration":0,
+   "hackSuccess":0,
+   "hackFail":0,
+   "collectedMoney":0,
+   "weakenCumulated":0
+}
+
+disableLog('getServerSecurityLevel')
+disableLog('getServerMinSecurityLevel')
+disableLog('getServerMoneyAvailable')
+disableLog('getServerMaxMoney')
+disableLog('grow')
+disableLog('hack')
+disableLog('weaken')
+
+while (true) {
+	if (getServerSecurityLevel(s) >= getServerMinSecurityLevel(s) * 2) {
+
+		var availableSecurity = getServerSecurityLevel(s)
+
+		print("Actual security level : " + Math.round(getServerSecurityLevel(s)));
+		print("Minimum security level : " + getServerMinSecurityLevel(s));
+		print("Aiming for max security level of : " + getServerMinSecurityLevel(s) * 2)
+
+		weaken(s);
+		print('Weaken')
+
+		stats.weakenIteration += 1
+		var deltaW = availableSecurity - getServerSecurityLevel(s)
+		
+		if ( deltaW > 0 ) stats.weakenCumulated += deltaW
+		
+
+	} else if (getServerMoneyAvailable(s) >= getServerMaxMoney(s) * 0.5) {
+
+		var availableMoney = getServerMoneyAvailable(s)
+
+		print("Actual money level : " + Math.round(getServerMoneyAvailable(s) * 100) / 100);
+		print("Maximum money level : " + getServerMaxMoney(s));
+		print("Aiming for more that : " + getServerMaxMoney(s)*0.5)
+
+		hack(s);
+		print('Hack')
+
+		stats.hackIteration += 1
+		var delta$ = availableMoney - getServerMoneyAvailable(s)
+
+		if (delta$ > 0 ) {
+			stats.collectedMoney += delta$
+			stats.hackSuccess++
+		} else {
+			stats.hackFail++
+		}
+		
+	} else 
+	// if (i%3 == 0) 
+	{
+
+		grow(s);
+		print('Grow')
+		
+		stats.growIteration += 1
+
+	}
+
+		// print('[ '+s+' ] Writing stats in statsHome_'+s+'.txt')
+		clear('statsHome_'+s+'.txt')
+		write('statsHome_'+s+'.txt', JSON.stringify(stats))
+		stats = JSON.parse(read('statsHome_'+s+'.txt'))
+	i++
+}

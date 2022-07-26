@@ -1,0 +1,85 @@
+var pServer = getPurchasedServers();
+
+var targetServer = [
+	'microdyne',
+	'helios',
+	'deltaone',
+	'icarus',
+	'zeus-med',
+	'omnia',
+	'defcomm',
+	'galactic-cyber',
+	'infocomm',
+	'taiyang-digital',
+	'stormtech',
+	'aerocorp',
+	'clarkinc',
+	'omnitek',
+	'nwo',
+	'4sigma',
+	'blade',
+	'b-and-a',
+	'ecorp',
+	'fulcrumtech',
+	'megacorp',
+	'kuai-gong',
+	'titan-labs',
+	'powerhouse-fitness',
+	'global-pharm'
+];
+var targetServer_2 = [
+	'omega-net',
+	'crush-fitness',
+	'johnson-ortho',
+	'the-hub',
+	'computek',
+	'netlink',
+	'rothman-uni',
+	'catalyst',
+	'summit-uni',
+	'rho-construction',
+	'millenium-fitness',
+	'aevum-police',
+	'alpha-ent',
+	'syscore',
+	'lexo-corp',
+	'snap-fitness',
+	'global-pharm',
+	'applied-energetics',
+	'unitalife',
+	'univ-energy',
+	'nova-med',
+	'zb-def',
+	'zb-institute',
+	'vitalife',
+	'titan-labs',
+]
+
+var script = 'scriptServer.script';
+var ram = 0;
+print(getPurchasedServers())
+switch (args[0]) {
+	case "run":
+	tprint("Run all servers selected")
+		for (i = 0; i < pServer.length; i++) {
+			ram = (getServerMaxRam(pServer[i]))/2.4;
+			if (isRunning(script, pServer[i]) == false) {
+				scp(script, 'home', pServer[i]);
+				scp('stats.txt', 'home', pServer[i]);
+
+				exec(script, pServer[i], ram, targetServer_2[i]);
+			} else {
+			tprint('{!} Server ' + listServer[i] + ' skipped because of script already running.')
+			}
+		};
+		break;
+	case "kill":
+	tprint("Kill all servers selevted")
+		for (i = 0; i < pServer.length; i++) {
+			if (isRunning(script, pServer[i]) == false) {
+				killall(pServer[i]);
+			};
+		};
+	default:
+		tprint("Unknown argument - run or kill");
+};

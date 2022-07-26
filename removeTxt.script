@@ -1,0 +1,62 @@
+var listServer = [
+	'n00dles',
+	'foodnstuff',
+	'sigma-cosmetics',
+	'joesguns',
+	'hong-fang-tea',
+	'harakiri-sushi',
+	'iron-gym',
+	'max-hardware',
+	'nectar-net',
+	'zer0',
+	'CSEC',
+	'silver-helix',
+	'omega-net',
+	'phantasy',
+	'neo-net',
+	'avmnite-02h',
+	'the-hub',
+	'catalyst',
+	'zb-institute',
+	'rothman-uni',
+	'summit-uni',
+	'I.I.I.I',
+	'netlink',
+	'aevum-police',
+	'computek',
+	'syscore',
+	'lexo-corp',
+	'aerocorp',
+	'omnia',
+	'defcomm',
+	'alpha-ent',
+	'snap-fitness',
+	'millenium-fitness',
+	'galactic-cyber',
+	'deltaone',
+	'icarus',
+	'zb-def',
+	'unitalife',
+	'univ-energy',
+	'solaris',
+	'infocomm',
+	'taiyang-digital',
+	'zeus-med',
+	'nova-med',
+	'global-pharm',
+	'crush-fitness',
+	'rho-construction',
+	'johnson-ortho',
+	'darkweb'
+];
+var accessibleServer = []
+
+for (i = 0; i < listServer.length; i++) {
+	hasRootAccess(listServer[i]) ? accessibleServer.push(listServer[i]) : undefined
+}
+
+for (i=0; i<accessibleServer.length; i++){
+	var file = 'statsHome_' + accessibleServer[i] + '.txt'
+	print("Removing "+ file +"...")
+	rm(file, 'home')
+}

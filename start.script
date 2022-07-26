@@ -1,0 +1,111 @@
+var listServer = [
+	'n00dles',
+	'foodnstuff',
+	'sigma-cosmetics',
+	'joesguns',
+	'nectar-net',
+	'hong-fang-tea',
+	'harakiri-sushi',
+	'neo-net',
+	'zer0',
+	'max-hardware',
+	'iron-gym',
+	'phantasy',
+	'silver-helix',
+	'omega-net',
+	'crush-fitness',
+	'johnson-ortho',
+	'the-hub',
+	'computek',
+	'netlink',
+	'rothman-uni',
+	'catalyst',
+	'summit-uni',
+	'rho-construction',
+	'millenium-fitness',
+	'aevum-police',
+	'alpha-ent',
+	'syscore',
+	'lexo-corp',
+	'snap-fitness',
+	'global-pharm',
+	'applied-energetics',
+	'unitalife',
+	'univ-energy',
+	'nova-med',
+	'zb-def',
+	'zb-institute',
+	'vitalife',
+	'titan-labs',
+	'solaris',
+	'microdyne',
+	'helios',
+	'deltaone',
+	'icarus',
+	'zeus-med',
+	'omnia',
+	'defcomm',
+	'galactic-cyber',
+	'infocomm',
+	'taiyang-digital',
+	'stormtech',
+	'aerocorp',
+	'clarkinc',
+	'omnitek',
+	'nwo',
+	'4sigma',
+	'blade',
+	'b-and-a',
+	'ecorp',
+	'fulcrumtech',
+	'megacorp',
+	'kuai-gong',
+	'fulcrumassets',
+	'powerhouse-fitness',
+];
+
+disableLog("getServerMaxRam")
+disableLog("sqlinject")
+disableLog("httpworm")
+disableLog("relaysmtp")
+disableLog("ftpcrack")
+disableLog("brutessh")
+
+var script = 'scriptServer.script';
+var i = 0;
+
+while (listServer.length != i) {
+	var ram = Math.round(getServerMaxRam(listServer[i]) / 2.5);
+	print(ram)
+	if (isRunning(script, listServer[i], listServer[i]) === false) {
+		if (hasRootAccess(listServer[i]) === false) {
+
+			if (fileExists('SQLInject.exe', 'home')) sqlinject(listServer[i]);
+			if (fileExists('HTTPWorm.exe', 'home')) httpworm(listServer[i]);
+			if (fileExists('relaySMTP.exe', 'home')) relaysmtp(listServer[i]);
+			if (fileExists('FTPCrack.exe', 'home')) ftpcrack(listServer[i]);
+			if (fileExists('BruteSSH.exe', 'home')) brutessh(listServer[i]);
+
+			nuke(listServer[i]);
+			tprint("Hacked server : " + listServer[i])
+
+			installBackdoor(listServer[i])
+			tprint ('Backdoor installed : ' + listServer[i])
+		};
+		scp(script, 'home', listServer[i]);
+		scp('stats.txt', 'home', listServer[i]);
+		//scp('rename.script', 'home', listServer[i])
+		if (ram !== 0) {
+			//exec('rename.script', listServer[i], 1,'blankStats.txt', 'stats.txt', listServer[i])
+			
+				//sleep(10000)
+			
+			exec(script, listServer[i], ram, listServer[i]);
+			tprint ('Script started on : ' + listServer[i] + ' with ' + ram + 'GB of RAM')
+		}
+	} else {
+		tprint('{!} Server ' + listServer[i] + ' skipped because of script already running.')
+	}
+	
+	i = i + 1;
+};

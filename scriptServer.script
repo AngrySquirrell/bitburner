@@ -1,0 +1,57 @@
+var s = args[0];
+var i = 0;
+
+var stats = JSON.parse(read('stats.txt'))
+
+disableLog('getServerSecurityLevel')
+disableLog('getServerMinSecurityLevel')
+disableLog('getServerMoneyAvailable')
+disableLog('getServerMaxMoney')
+
+while (true) {
+	if (getServerSecurityLevel(s) >= getServerMinSecurityLevel(s) * 2) {
+
+		var availableSecurity = getServerSecurityLevel(s)
+
+		print("Actual security level : " + Math.round(getServerSecurityLevel(s)));
+		print("Minimum security level : " + getServerMinSecurityLevel(s));
+
+		weaken(s);
+		stats.weakenIteration += 1
+		var deltaW = Math.round((availableSecurity - getServerSecurityLevel(s))*100)/100
+		
+		if ( deltaW > 0 ) stats.weakenCumulated += deltaW
+		
+
+	} else if (getServerMoneyAvailable(s) >= getServerMaxMoney(s) * 0.5) {
+
+		var availableMoney = getServerMoneyAvailable(s)
+
+		print("Actual money level : " + Math.round(getServerMoneyAvailable(s) * 100) / 100);
+		print("Maximum money level : " + getServerMaxMoney(s));
+
+		hack(s);
+		stats.hackIteration += 1
+		var delta$ = Math.round((availableMoney - getServerMoneyAvailable(s))*100)/100
+
+		if (delta$ > 0 ) {
+			stats.collectedMoney += delta$
+			stats.hackSuccess++
+		} else {
+			stats.hackFail++
+		}
+		
+	} else {
+
+		grow(s);
+		
+		stats.growIteration += 1
+
+	}
+
+		print('[ '+s+' ] Writing stats in stats.txt')
+		clear('stats.txt')
+		write('stats.txt', JSON.stringify(stats))
+		stats = JSON.parse(read('stats.txt'))
+	i++
+}
