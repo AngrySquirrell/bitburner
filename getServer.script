@@ -14,7 +14,7 @@ if (mult == null || mult == undefined || mult == NaN) {
         ram = 4096*i
         i++
     }
-    ( ram === 0 ) ? ram = 4096*i : ram = 4096*(i-1)
+    ( ram === 0 ) ? ram = 4096*i : ram = 4096*(i)
     tprint("Max ram settled at "+ram+"GB")
 }
 

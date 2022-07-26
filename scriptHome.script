@@ -70,8 +70,8 @@ while (true) {
 	}
 
 		// print('[ '+s+' ] Writing stats in statsHome_'+s+'.txt')
-		clear('statsHome_'+s+'.txt')
-		write('statsHome_'+s+'.txt', JSON.stringify(stats))
-		stats = JSON.parse(read('statsHome_'+s+'.txt'))
+		clear('/stats/statsHome_'+s+'.txt')
+		write('/stats/statsHome_'+s+'.txt', JSON.stringify(stats))
+		stats = JSON.parse(read('/stats/statsHome_'+s+'.txt'))
 	i++
 }

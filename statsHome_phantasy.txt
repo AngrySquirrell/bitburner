@@ -1,1 +1,0 @@
-{"growIteration":15,"hackIteration":1,"weakenIteration":4,"hackSuccess":1,"hackFail":0,"collectedMoney":67500000,"weakenCumulated":34.732}
