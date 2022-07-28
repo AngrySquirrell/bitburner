@@ -73,7 +73,7 @@ disableLog("exec")
 var script = 'scriptHome.script';
 var home = getHostname();
 tprint('Home accesible RAM : ' + getServerMaxRam(home))
-var thread = Math.round(((getServerMaxRam(home) - 3.2) / 25) / 2.4);
+var thread = Math.round(((getServerMaxRam(home) - 3.2) / ((accessibleServer.length < 25) ? accessibleServer.length : 25)) / 2.4);
 tprint('Thread allowed per script : ' + thread)
 if (thread != 0){
 
@@ -87,8 +87,8 @@ if (thread != 0){
 	// 	print(j +' - '+ accessibleServer[j])
 	// }
 
-
-	for (i = 0; i <= 25; i++ ){
+	
+	for (i = 0; i < ((accessibleServer.length < 25) ? accessibleServer.length : 25) ; i++ ){
 	tprint(accessibleServer[i] +' - '+ i)
 	if ( isRunning(script, home, accessibleServer[i] ) || !hasRootAccess(accessibleServer[i])) {
 		tprint ('Skipped ' + accessibleServer[i] + " because the script is already running or hasn't root access");

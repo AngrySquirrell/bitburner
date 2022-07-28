@@ -1,0 +1,4 @@
+var ram = Math.pow(2,10)
+tprint(ram)
+var powah = Math.log(ram)/Math.log(2) 
+tprint(powah)

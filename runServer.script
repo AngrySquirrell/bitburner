@@ -1,4 +1,5 @@
 var pServer = getPurchasedServers();
+tprint (pServer)
 
 var targetServer = [
 	'microdyne',
@@ -63,9 +64,10 @@ switch (args[0]) {
 	tprint("Run all servers selected")
 		for (i = 0; i < pServer.length; i++) {
 			ram = (getServerMaxRam(pServer[i]))/2.4;
+			
 			if (isRunning(script, pServer[i]) == false) {
-				scp(script, 'home', pServer[i]);
-				scp('stats.txt', 'home', pServer[i]);
+				scp(script, pServer[i]);
+				scp('stats.txt', pServer[i]);
 
 				exec(script, pServer[i], ram, targetServer_2[i]);
 			} else {

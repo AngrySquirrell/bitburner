@@ -1,7 +1,13 @@
 var s = args[0];
 var i = 0;
 
-var stats = JSON.parse(read('stats.txt'))
+var stats = undefined;
+try {
+	stats = JSON.parse(read('stats.txt'))
+} catch (error) {
+	tprint('\n\t[ ! ]\t\n JSON reset due to read error')
+	stats = {"growIteration":0,"hackIteration":0,"weakenIteration":1,"hackSuccess":0,"hackFail":0,"collectedMoney":0,"weakenCumulated":0.3}
+}
 
 disableLog('getServerSecurityLevel')
 disableLog('getServerMinSecurityLevel')

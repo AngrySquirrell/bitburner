@@ -1,22 +1,23 @@
 var pServer = getPurchasedServers();
-var mult = args[1];
-tprint(mult + " - " + args[1])
-var ram = 0
-if (mult == null || mult == undefined || mult == NaN) {
-    ram = 262144;
-} else if (mult === 'max') {
-    ram = getPurchasedServerMaxRam();
-    tprint (ram)
-} else if (mult === 'minmax'){
-    var pMoney = getServerMoneyAvailable('home')
-    var i = 0
-    while (pMoney < getPurchasedServerCost(ram)){
-        ram = 4096*i
-        i++
-    }
-    ( ram === 0 ) ? ram = 4096*i : ram = 4096*(i)
-    tprint("Max ram settled at "+ram+"GB")
-}
+var powah = args[1];
+if (powah<=11 && !(powah == null || powah == undefined || powah == NaN)) throw new Error('Power value not high enough ('+ args[1] +' < 11)')
+if (powah == null || powah == undefined || powah == NaN) powah = undefined
+tprint(powah + " - " + args[1])
+var ram = Math.pow(2, powah)
+// if (powah == null || powah == undefined || powah == NaN) {
+//     ram = 262144;
+// } else if (powah === 'max') {
+//     ram = getPurchasedServerMaxRam();
+//     tprint (ram)
+// } else if (powah === 'minmax'){
+//     var pMoney = getServerMoneyAvailable('home')
+//     // for (i=0; pMoney < getPurchasedServerCost(Math.pow(2, i));i++){
+//     // }
+//     // if (i==0) throw new Error('Not enough money to buy any server'); 
+//     // else ram = Math.pow(2, i)
+//     ram = Math.pow(2, 12)
+//     tprint("Max ram settled at "+ram+"GB")
+// }
 
 disableLog("purchaseServer");
 disableLog("deleteServer");
@@ -40,7 +41,9 @@ switch (args[0].toLowerCase()) {
         var cost =  Math.ceil((getPurchasedServerCost(ram)*25)*100)/100
 
         if ( cost > getServerMoneyAvailable("home")) {
-            if (cost >= Math.pow(10, 9)) cost = Math.ceil(cost/Math.pow(10, 9)*100)/100 + " b$"
+            
+            if (cost >= Math.pow(10, 12)) cost = Math.ceil(cost/Math.pow(10, 12)*100)/100 + " t$"
+            else if (cost >= Math.pow(10, 9)) cost = Math.ceil(cost/Math.pow(10, 9)*100)/100 + " b$"
             else if (cost >= Math.pow(10, 6)) cost = Math.ceil(cost/Math.pow(10, 6)*100)/100 + " m$"
             else if (cost >= Math.pow(10, 3)) cost = Math.ceil(cost/Math.pow(10, 3)*100)/100 + " k$"
             tprint ("Not enough money, "+ cost +" needed.")
@@ -60,13 +63,20 @@ switch (args[0].toLowerCase()) {
         // };
 
         cost = Math.ceil((getPurchasedServerCost(ram)*25)*100)/100
-        if (cost >= Math.pow(10, 9)) cost = Math.ceil(cost/Math.pow(10, 9)*100)/100 + " b$"
+        if (cost >= Math.pow(10, 12)) cost = Math.ceil(cost/Math.pow(10, 12)*100)/100 + " t$"
+        else if (cost >= Math.pow(10, 9)) cost = Math.ceil(cost/Math.pow(10, 9)*100)/100 + " b$"
         else if (cost >= Math.pow(10, 6)) cost = Math.ceil(cost/Math.pow(10, 6)*100)/100 + " m$"
         else if (cost >= Math.pow(10, 3)) cost = Math.ceil(cost/Math.pow(10, 3)*100)/100 + " k$"
 
-        tprint("The cost of 25 "+ ram +"GB is : "+ cost)
+        tprint("The cost of 25 servers with "+ ram +"GB is : "+ cost)
+        break;
+
+    case "get":
+
+        tprint('You have '+pServer.length+' Servers. \n\t Each with '+getServerMaxRam(pServer[0])+'GB. ( 2^' + Math.round(Math.log(getServerMaxRam(pServer[0])/Math.log(2))) + ' )')
+
         break;
 
     default:
-        tprint("Unknown argument - sell, buy or info");
+        tprint("Unknown argument - sell, buy, info of get");
 }

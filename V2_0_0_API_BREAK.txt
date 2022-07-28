@@ -1,0 +1,26 @@
+This file contains the list of potential API break. A pattern was used to look through all your files and note the spots where you might have a problem. Not everything here is broken./ns\.scp/g
+scp arguments were switch, it is now scp(files, destination, optionally_source). If you were using 2 argument (not 3) this doesn't affect you.
+
+	start.script
+		Line 95 scp(script, 'home', listServer[i]);
+		Line 96 scp('stats.txt', 'home', listServer[i]);
+		Line 97 //scp('rename.script', 'home', listServer[i])
+	runServer.script
+		Line 69 scp(script, 'home', pServer[i]);
+		Line 70 scp('stats.txt', 'home', pServer[i]);
+
+
+/ns\.stock\.buy/g
+buy is a very common word so in order to avoid ram costs it was renamed ns.stock.buyStock
+
+	stockbot.js
+		Line 53 ns.stock.buy(stock, shares);
+
+
+/ns\.stock\.sell/g
+sell is a very common word so in order to avoid ram costs it was renamed ns.stock.sellStock
+
+	stockbot.js
+		Line 67 ns.stock.sell(stock, position[0]);
+
+

@@ -92,11 +92,11 @@ while (listServer.length != i) {
 			installBackdoor(listServer[i])
 			tprint ('Backdoor installed : ' + listServer[i])
 		};
-		scp(script, 'home', listServer[i]);
-		scp('stats.txt', 'home', listServer[i]);
 		//scp('rename.script', 'home', listServer[i])
 		if (ram !== 0) {
 			//exec('rename.script', listServer[i], 1,'blankStats.txt', 'stats.txt', listServer[i])
+		if (!fileExists(script, listServer[i])) scp(script, listServer[i]);
+		if (!fileExists('stats.txt', listServer[i])) scp('stats.txt', listServer[i]);
 			
 				//sleep(10000)
 			
